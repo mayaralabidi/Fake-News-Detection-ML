@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply box-border;
+}
+
+html,
+body {
+  @apply h-full bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white;
+}
+
+body {
+  @apply overflow-x-hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-purple-500 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-purple-400;
+}
+
+/* Custom animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes slide-in {
+  from {
+    @apply opacity-0 transform translate-y-4;
+  }
+  to {
+    @apply opacity-100 transform translate-y-0;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Glass morphism effect */
+.glass-morphism {
+  @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-lg;
+}
+
+/* Button utilities */
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95;
+}
+
+.btn-danger {
+  @apply px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95;
+}
+
+/* Badge utilities */
+.badge-real {
+  @apply bg-green-500/20 text-green-300 border border-green-500/50 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-fake {
+  @apply bg-red-500/20 text-red-300 border border-red-500/50 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-loading {
+  @apply bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 px-3 py-1 rounded-full text-sm font-medium;
+}

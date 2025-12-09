@@ -11,7 +11,20 @@ from predict import FakeNewsPredictor
 from src.logger import logging
 
 app = Flask(__name__)
-CORS(app)
+
+# Configure CORS with explicit origins
+cors_config = {
+    "origins": [
+        "http://localhost:3000",
+        "http://localhost:5000",
+        "https://https://fnd-ml-4svqvr9hb-mayaralabidis-projects.vercel.app",
+        "https://*.vercel.app"
+    ],
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization"],
+    "supports_credentials": True
+}
+CORS(app, resources={r"/api/*": cors_config})
 
 # Initialize the predictor
 try:

@@ -13,18 +13,19 @@ from src.logger import logging
 app = Flask(__name__)
 
 # Configure CORS with explicit origins
-cors_config = {
-    "origins": [
-        "http://localhost:3000",
-        "http://localhost:5000",
-        "https://https://fnd-ml-4svqvr9hb-mayaralabidis-projects.vercel.app",
-        "https://*.vercel.app"
-    ],
-    "methods": ["GET", "POST", "OPTIONS"],
-    "allow_headers": ["Content-Type", "Authorization"],
-    "supports_credentials": True
-}
-CORS(app, resources={r"/api/*": cors_config})
+# For deployment, allow CORS on API endpoints. Use a permissive policy here
+# to ensure browser preflight requests receive proper headers. For stricter
+# security, replace "*" with a specific origin or a validated origin echo.
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=False)
+
+
+@app.after_request
+def add_cors_headers(response):
+    # Ensure CORS headers exist on every API response (helps with OPTIONS preflight)
+    response.headers.setdefault('Access-Control-Allow-Origin', '*')
+    response.headers.setdefault('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    response.headers.setdefault('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    return response
 
 # Initialize the predictor
 try:
